@@ -1,3 +1,15 @@
+<?php
+session_start();
+require_once 'db_functions.php';
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+$user = getRecords('users', ['id' => $_SESSION['user_id']], '')[0];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,18 +30,18 @@
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link text-white" href="riwayat.html">Riwayat</a>
+                <a class="nav-link text-white" href="riwayat.php">Riwayat</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link text-white" href="#">Chat</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Pengaturan
+                  <?php echo htmlspecialchars($user['name']); ?>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                   <li><a class="dropdown-item text-primary" href="#">Profile</a></li>
-                  <li><a class="dropdown-item text-primary" href="index.html">Keluar</a></li>
+                  <li><a class="dropdown-item text-primary" href="logout.php">Keluar</a></li>
                 </ul>
               </li>
             </ul>
