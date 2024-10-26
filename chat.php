@@ -194,6 +194,24 @@ if (isset($_POST['start_new_chat'])) {
             border-radius: 5px;
             color: #856404;
         }
+
+        .end-chat-form {
+            margin-left: 10px; }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+
+        .input-group {
+            width: 100%;
+        }
     </style>
 </head>
 
@@ -249,15 +267,21 @@ if (isset($_POST['start_new_chat'])) {
                 </div>
 
                 <?php if (!$isChatEnded): ?>
-                    <form action="" method="post" class="mb-3">
-                        <div class="input-group">
-                            <textarea class="form-control" id="message" name="message" required placeholder="Tulis pesan anda..."></textarea>
-                            <button type="submit" name="send_message" class="btn btn-primary">Kirim</button>
-                            <?php if (isset($chatSession) && $chatSession && isset($chatSession['is_active']) && $chatSession['is_active']): ?>
-                                <button type="submit" name="end_chat" class="btn btn-secondary">Akhiri Chat</button>
-                            <?php endif; ?>
-                        </div>
-                    </form>
+                    <div class="mb-3">
+                        <form action="" method="post" class="message-form" style="display: inline-block; width: 85%;">
+                            <div class="input-group">
+                                <textarea class="form-control" id="message" name="message" placeholder="Tulis pesan anda..."></textarea>
+                                <button type="submit" name="send_message" class="btn btn-primary">Kirim</button>
+                            </div>
+                        </form>
+                        
+                        <?php if (isset($chatSession) && $chatSession && isset($chatSession['is_active']) && $chatSession['is_active']): ?>
+                            <form action="" method="post" class="end-chat-form" style="display: inline-block;">
+                                <button type="button" onclick="confirmEndChat()" class="btn btn-danger">Akhiri Chat</button>
+                                <input type="hidden" name="end_chat" value="1">
+                            </form>
+                        <?php endif; ?>
+                    </div>
                 <?php else: ?>
                     <form action="chat.php" method="post" class="mb-3">
                         <button type="submit" name="start_new_chat" class="btn btn-primary btn-block w-100">Mulai Chat Baru</button>
@@ -268,79 +292,97 @@ if (isset($_POST['start_new_chat'])) {
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Auto-scroll ke bagian bawah chat
-            const chatContainer = document.querySelector('.chat-container');
-            if (chatContainer) {
-                chatContainer.scrollTop = chatContainer.scrollHeight;
+    // Pindahkan fungsi confirmEndChat ke scope global
+    function confirmEndChat() {
+        if (confirm('Apakah Anda yakin ingin mengakhiri chat ini?')) {
+            document.querySelector('.end-chat-form').submit();
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Auto-scroll ke bagian bawah chat
+        const chatContainer = document.querySelector('.chat-container');
+        if (chatContainer) {
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        // Ambil referensi form dan input message
+        const messageForm = document.querySelector('.message-form');
+        const messageInput = document.querySelector('#message');
+        let isTyping = false;
+
+        // Deteksi ketika user mulai mengetik
+        if (messageInput) {
+            messageInput.addEventListener('focus', function() {
+                isTyping = true;
+            });
+
+            messageInput.addEventListener('blur', function() {
+                isTyping = false;
+            });
+        }
+
+        // Function untuk memperbarui chat
+        function updateChat() {
+            if (!document.hidden && !isTyping) {
+                fetch('get_messages.php?session_id=<?php echo $chatSessionId; ?>')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.messages) {
+                            updateChatContainer(data.messages);
+                        }
+                    })
+                    .catch(error => console.log('Error:', error));
             }
+        }
 
-            // Ambil referensi form dan input message
-            const messageForm = document.querySelector('form');
-            const messageInput = document.querySelector('#message');
-            let isTyping = false;
+        // Fungsi untuk memperbarui container chat
+        function updateChatContainer(messages) {
+            if (!chatContainer) return;
 
-            // Deteksi ketika user mulai mengetik
-            if (messageInput) {
-                messageInput.addEventListener('focus', function() {
-                    isTyping = true;
-                });
+            let html = '';
+            messages.forEach(message => {
+                const messageClass = message.role === 'user' ? 'user' : 'admin';
+                const time = new Date(message.created_at).toLocaleString();
 
-                messageInput.addEventListener('blur', function() {
-                    isTyping = false;
-                });
-            }
+                html += `
+                    <div class="message ${messageClass}">
+                        <div class="message-info">${escapeHtml(message.nama)}</div>
+                        <div class="message-time">${time}</div>
+                        <p>${escapeHtml(message.message)}</p>
+                    </div>
+                `;
+            });
 
-            // Function untuk memperbarui chat
-            function updateChat() {
-                if (!document.hidden && !isTyping) {
-                    fetch('get_messages.php?session_id=<?php echo $chatSessionId; ?>')
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.messages) {
-                                updateChatContainer(data.messages);
-                            }
-                        })
-                        .catch(error => console.log('Error:', error));
+            chatContainer.innerHTML = html;
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        // Function untuk escape HTML
+        function escapeHtml(unsafe) {
+            return unsafe
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        // Set interval untuk update chat
+        setInterval(updateChat, 5000); // Update setiap 5 detik
+
+        // Tambahkan validasi form untuk pengiriman pesan
+        if (messageForm) {
+            messageForm.addEventListener('submit', function(e) {
+                const messageInput = this.querySelector('#message');
+                if (!messageInput.value.trim()) {
+                    e.preventDefault();
+                    alert('Silakan tulis pesan terlebih dahulu');
                 }
-            }
-
-            // Fungsi untuk memperbarui container chat
-            function updateChatContainer(messages) {
-                if (!chatContainer) return;
-
-                let html = '';
-                messages.forEach(message => {
-                    const messageClass = message.role === 'user' ? 'user' : 'admin';
-                    const time = new Date(message.created_at).toLocaleString();
-
-                    html += `
-                <div class="message ${messageClass}">
-                    <div class="message-info">${escapeHtml(message.nama)}</div>
-                    <div class="message-time">${time}</div>
-                    <p>${escapeHtml(message.message)}</p>
-                </div>
-            `;
-                });
-
-                chatContainer.innerHTML = html;
-                chatContainer.scrollTop = chatContainer.scrollHeight;
-            }
-
-            // Function untuk escape HTML
-            function escapeHtml(unsafe) {
-                return unsafe
-                    .replace(/&/g, "&amp;")
-                    .replace(/</g, "&lt;")
-                    .replace(/>/g, "&gt;")
-                    .replace(/"/g, "&quot;")
-                    .replace(/'/g, "&#039;");
-            }
-
-            // Set interval untuk update chat
-            setInterval(updateChat, 5000); // Update setiap 5 detik
-        });
-    </script>
+            });
+        }
+    });
+</script>
 </body>
 
 </html>

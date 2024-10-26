@@ -217,17 +217,9 @@ if (isset($_POST['end_chat'])) {
                         <a class="nav-link text-white" href="service.php">Service List</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="chat.php">Chat</a>
+                        <a class="nav-link text-white" href="admin_chat.php">Chat</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown">
-                            Pengaturan
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item text-primary" href="#">Profile</a></li>
-                            <li><a class="dropdown-item text-primary" href="logout.php">Keluar</a></li>
-                        </ul>
-                    </li>
+                    
                 </ul>
             </div>
         </div>

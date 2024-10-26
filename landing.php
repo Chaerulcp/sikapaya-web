@@ -43,7 +43,7 @@ if (!isset($_SESSION['user_id'])) {
                             Pengaturan
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item text-primary" href="#">Profile</a></li>
+                            <li><a class="dropdown-item text-primary" href="profil.php">Profile</a></li>
                             <li><a class="dropdown-item text-primary" href="logout.php">Keluar</a></li>
                         </ul>
                     </li>
