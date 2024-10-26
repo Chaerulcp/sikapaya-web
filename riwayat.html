@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <title>Riwayat</title>
+</head>
+<body>
+    <style>
+        .btn-close {
+          background-color: #ff0000; /* Ganti dengan warna yang Anda suka */
+          color: #fff;
+          padding: 10px 20px;
+          font-size: 16px;
+          cursor: pointer;
+        }
+      
+        .btn-close:hover {
+          background-color: #cc0000;
+        }
+      
+        .container {
+          position: relative;
+        }
+      
+        .btn-close {
+          position: absolute;
+          top: 10px; /* Atur jarak dari atas */
+          right: 10px; /* Atur jarak dari kanan */
+        }
+      </style>
+      
+      <div class="container">
+        <a href="landing.html" class="btn-close btn-lg" aria-label="Close"></a>
+      </div>
+ <div class="container m-5">
+     <table class="table table-striped">
+         <thead>
+             <tr>
+                <th>No</th>
+                 <th>Tanggal</th>
+                 <th>Merek</th>
+                 <th>Jenis Alat</th>
+                 <th>Kerusakan</th>
+                 <th>Metode Pembayaran</th>
+                 <th>Catatan</th>
+                 <th>Status</th>
+                 <th>Pembatalan</th>
+             </tr>
+         </thead>
+ 
+         <tbody>
+             <tr>
+                 <th>1. </th>
+                 <td>20/10/2024</td>
+                 <td>SHARP</td>
+                 <td>TV</td>
+                 <td>Mati Total</td>
+                 <td>Cash</td>
+                 <td>-</td>
+                 <td style="color: chartreuse;">Selesai</td>
+                 <td><button type="button" class="btn btn-secondary" disabled>Batalkan</button></td>
+             </tr>
+ 
+             <tr>
+                <th>2. </th>
+                <td>20/10/2024</td>
+                <td>SHARP</td>
+                <td>Mesin Cuci</td>
+                <td>Meledak</td>
+                <td>Cash</td>
+                <td>-</td>
+                <td style="color: chartreuse;">Selesai</td>
+                <td><button type="button" class="btn btn-secondary" disabled>Batalkan</button></td>
+             </tr>
+ 
+             <tr>
+                <th>3. </th>
+                <td>20/10/2024</td>
+                <td>Panasonic</td>
+                <td>Mesin Cuci</td>
+                <td>Tidak bisa mencuci</td>
+                <td>Cash</td>
+                <td>-</td>
+                <td style="color: orange;">Menunggu Konfirmasi</td>
+                <td><button type="button" class="btn btn-outline-danger">Batalkan</button></td>
+             </tr>
+ 
+         </tbody>
+     </table>
+ </div>
+
+    <script src="js/bootstrap.js"></script>
+    <script src="js/popper.min.js"></script>
+</body>
+</html>
