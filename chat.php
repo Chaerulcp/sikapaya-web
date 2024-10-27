@@ -195,8 +195,19 @@ if (isset($_POST['start_new_chat'])) {
             color: #856404;
         }
 
+        .welcome-message {
+            text-align: center ;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            border-radius: 5px;
+            color: #856404;
+        }
+
         .end-chat-form {
-            margin-left: 10px; }
+            margin-left: 10px;
+        }
 
         .btn-danger {
             background-color: #dc3545;
@@ -225,10 +236,10 @@ if (isset($_POST['start_new_chat'])) {
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
-                <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link text-white" href="landing.php">Home</a>
                     </li>
-                    
+
                 </ul>
             </div>
         </div>
@@ -245,36 +256,62 @@ if (isset($_POST['start_new_chat'])) {
                 <?php endif; ?>
 
                 <div class="chat-container">
-                    <?php if (isset($messages) && count($messages) > 0): ?>
-                        <?php foreach ($messages as $msg): ?>
-                            <div class="message <?= $msg['role'] === 'user' ? 'user' : 'admin' ?>">
-                                <div class="message-info"><?= htmlspecialchars($msg['nama']) ?></div>
-                                <div class="message-time"><?= date('d/m/Y H:i', strtotime($msg['created_at'])) ?></div>
-                                <p><?= htmlspecialchars($msg['message']) ?></p>
+                    <?php if (!$chatSession): ?>
+                        <!-- Tampilan awal untuk user baru -->
+                        <div class="welcome-message">
+                            <h4>Selamat datang di Layanan Chat Sikapaiyya</h4>
+                            <p class="mb-4">Silakan ikuti petunjuk berikut sebelum memulai chat:</p>
+                            <div class="text-start mb-4" style="max-width: 500px; margin: 0 auto;">
+                                <ol>
+                                    <li>Pastikan Anda sudah membaca syarat dan ketentuan layanan.</li>
+                                    <li>Jelaskan masalah Anda dengan detail dan jelas.</li>
+                                    <li>Tunggu respon dari admin kami.</li>
+                                    <li>Chat akan berakhir jika Anda menekan tombol "Akhiri Chat".</li>
+                                </ol>
                             </div>
-                        <?php endforeach; ?>
+                            <p class="mb-4">Jika Anda siap untuk memulai, klik tombol di bawah ini:</p>
+                            <form action="" method="post">
+                                <button type="submit" name="start_new_chat" class="btn btn-primary btn-lg">
+                                    Mulai Chat
+                                </button>
+                            </form>
+                        </div>
+                    <?php else: ?>
+                        <!-- Tampilan chat yang sudah ada -->
+                        <div class="mb-3">
+                            <h5>Chat Anda:</h5>
+                        </div>
+                        <?php if (isset($messages) && count($messages) > 0): ?>
+                            <?php foreach ($messages as $msg): ?>
+                                <div class="message <?= $msg['role'] === 'user' ? 'user' : 'admin' ?>">
+                                    <div class="message-info"><?= htmlspecialchars($msg['nama']) ?></div>
+                                    <div class="message-time"><?= date('d/m/Y H:i', strtotime($msg['created_at'])) ?></div>
+                                    <p><?= htmlspecialchars($msg['message']) ?></p>
+                                </div>
+                            <?php endforeach; ?>
 
-                        <?php if ($isChatEnded): ?>
+                            <?php if ($isChatEnded): ?>
+                                <div class="system-message">
+                                    Chat telah berakhir
+                                </div>
+                            <?php endif; ?>
+                        <?php else: ?>
                             <div class="system-message">
-                                Chat telah berakhir
+                                Mulai chat dengan mengirim pesan
                             </div>
                         <?php endif; ?>
-                    <?php else: ?>
-                        <div class="system-message">
-                            Mulai chat dengan mengirim pesan
-                        </div>
                     <?php endif; ?>
                 </div>
 
                 <?php if (!$isChatEnded): ?>
-                    <div class="mb-3">
+                    <div class="mb-3" id="message-controls" style="<?= !$chatSession ? 'display: none;' : '' ?>">
                         <form action="" method="post" class="message-form" style="display: inline-block; width: 85%;">
                             <div class="input-group">
                                 <textarea class="form-control" id="message" name="message" placeholder="Tulis pesan anda..."></textarea>
-                                <button type="submit" name="send_message" class="btn btn-primary">Kirim</button>
+                                <button type ="submit" name="send_message" class="btn btn-primary">Kirim</button>
                             </div>
                         </form>
-                        
+
                         <?php if (isset($chatSession) && $chatSession && isset($chatSession['is_active']) && $chatSession['is_active']): ?>
                             <form action="" method="post" class="end-chat-form" style="display: inline-block;">
                                 <button type="button" onclick="confirmEndChat()" class="btn btn-danger">Akhiri Chat</button>
@@ -292,97 +329,117 @@ if (isset($_POST['start_new_chat'])) {
     </div>
 
     <script>
-    // Pindahkan fungsi confirmEndChat ke scope global
-    function confirmEndChat() {
-        if (confirm('Apakah Anda yakin ingin mengakhiri chat ini?')) {
-            document.querySelector('.end-chat-form').submit();
-        }
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        // Auto-scroll ke bagian bawah chat
-        const chatContainer = document.querySelector('.chat-container');
-        if (chatContainer) {
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-        }
-
-        // Ambil referensi form dan input message
-        const messageForm = document.querySelector('.message-form');
-        const messageInput = document.querySelector('#message');
-        let isTyping = false;
-
-        // Deteksi ketika user mulai mengetik
-        if (messageInput) {
-            messageInput.addEventListener('focus', function() {
-                isTyping = true;
-            });
-
-            messageInput.addEventListener('blur', function() {
-                isTyping = false;
-            });
-        }
-
-        // Function untuk memperbarui chat
-        function updateChat() {
-            if (!document.hidden && !isTyping) {
-                fetch('get_messages.php?session_id=<?php echo $chatSessionId; ?>')
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.messages) {
-                            updateChatContainer(data.messages);
-                        }
-                    })
-                    .catch(error => console.log('Error:', error));
+        // Fungsi untuk menampilkan kontrol pesan
+        function showMessageControls() {
+            const messageControls = document.getElementById('message-controls');
+            if (messageControls) {
+                messageControls.style.display = 'block';
             }
         }
 
-        // Fungsi untuk memperbarui container chat
-        function updateChatContainer(messages) {
-            if (!chatContainer) return;
+        // Fungsi untuk konfirmasi mengakhiri chat
+        function confirmEndChat() {
+            if (confirm('Apakah Anda yakin ingin mengakhiri chat ini?')) {
+                document.querySelector('.end-chat-form').submit();
+            }
+        }
 
-            let html = '';
-            messages.forEach(message => {
-                const messageClass = message.role === 'user' ? 'user' : 'admin';
-                const time = new Date(message.created_at).toLocaleString();
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tangani submit form start new chat
+            const startChatForm = document.querySelector('form[name="start_new_chat"]');
+            if (startChatForm) {
+                startChatForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // Kirim form
+                    this.submit();
+                    // Tampilkan kontrol pesan
+                    showMessageControls();
+                });
+            }
 
-                html += `
+            // Auto-scroll ke bagian bawah chat
+            const chatContainer = document.querySelector('.chat-container');
+            if (chatContainer) {
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }
+
+            // Ambil referensi form dan input message
+            const messageForm = document.querySelector('.message-form');
+            const messageInput = document.querySelector('#message');
+            let isTyping = false;
+
+            // Deteksi ketika user mulai mengetik
+            if (messageInput) {
+                messageInput.addEventListener('focus', function() {
+                    isTyping = true;
+                });
+
+                messageInput.addEventListener('blur', function() {
+                    isTyping = false;
+                });
+            }
+
+            // Validasi form untuk pengiriman pesan
+            if (messageForm) {
+                messageForm.addEventListener('submit', function(e) {
+                    const messageInput = this.querySelector('#message');
+                    if (!messageInput.value.trim()) {
+                        e.preventDefault();
+                        alert('Silakan tulis pesan terlebih dahulu');
+                    }
+                });
+            }
+
+            // Function untuk memperbarui chat
+            function updateChat() {
+                if (!document.hidden && !isTyping) {
+                    fetch('get_messages.php?session_id=<?php echo $chatSessionId; ?>')
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.messages) {
+                                updateChatContainer(data.messages);
+                            }
+                        })
+                        .catch(error => console.log('Error:', error));
+                }
+            }
+
+            // Fungsi untuk memperbarui container chat
+            function updateChatContainer(messages) {
+                if (!chatContainer) return;
+
+                let html = '';
+                messages.forEach(message => {
+                    const messageClass = message.role === 'user' ? 'user' : 'admin';
+                    const time = new Date(message.created_at).toLocaleString();
+
+                    html += `
                     <div class="message ${messageClass}">
                         <div class="message-info">${escapeHtml(message.nama)}</div>
                         <div class="message-time">${time}</div>
                         <p>${escapeHtml(message.message)}</p>
                     </div>
                 `;
-            });
+                });
 
-            chatContainer.innerHTML = html;
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-        }
+                chatContainer.innerHTML = html;
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }
 
-        // Function untuk escape HTML
-        function escapeHtml(unsafe) {
-            return unsafe
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#039;");
-        }
+            // Function untuk escape HTML
+            function escapeHtml(unsafe) {
+                return unsafe
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#039;");
+            }
 
-        // Set interval untuk update chat
-        setInterval(updateChat, 5000); // Update setiap 5 detik
-
-        // Tambahkan validasi form untuk pengiriman pesan
-        if (messageForm) {
-            messageForm.addEventListener('submit', function(e) {
-                const messageInput = this.querySelector('#message');
-                if (!messageInput.value.trim()) {
-                    e.preventDefault();
-                    alert('Silakan tulis pesan terlebih dahulu');
-                }
-            });
-        }
-    });
-</script>
+            // Set interval untuk update chat
+            setInterval(updateChat, 5000); // Update setiap 5 detik
+        });
+    </script>
 </body>
 
 </html>
