@@ -52,15 +52,6 @@ if(isset($_POST['submit'])) {
                     <li class="nav-item">
                         <a class="nav-link text-white" href="riwayat.php">Riwayat</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown">
-                            Pengaturan
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item text-primary" href="#">Profile</a></li>
-                            <li><a class="dropdown-item text-primary" href="logout.php">Keluar</a></li>
-                        </ul>
-                    </li>
                 </ul>
             </div>
         </div>
