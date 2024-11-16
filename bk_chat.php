@@ -145,6 +145,9 @@ if (isset($_POST['start_new_chat'])) {
                             VALUES (?, ?, ?, TRUE)");
         $stmt->execute([$newChatSessionId, $_SESSION['user_id'], "Chat baru dimulai"]);
 
+        // // Inisialisasi sesi chat bot
+        // $_SESSION['current_chat_session'] = $newChatSessionId;
+        // include 'chat_bot.php';
 
         header("Location: chat.php");
         exit();

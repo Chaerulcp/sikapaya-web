@@ -55,6 +55,10 @@ if (isset($_GET['session_id'])) {
                 $stmt = $db->prepare("INSERT INTO chats (session_id, sender_id, message, is_system_message) 
                                     VALUES (?, ?, ?, TRUE)");
                 $stmt->execute([$session_id, $_SESSION['user_id'], $joinMessage]);
+
+                // Eksekusi chat_bot.php
+                $_SESSION['current_chat_session'] = $session_id; // Set session untuk chat_bot.php
+                include 'chat_bot.php';
             }
 
             // Ambil semua pesan dalam sesi ini
