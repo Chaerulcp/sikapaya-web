@@ -72,7 +72,7 @@ if (!isset($_SESSION['user_id'])) {
                 <div class="card-body">
                     <h5 class="card-title">Denpoo</h5>
                     <p class="card-text">Denpoo, ditulis sebagai DENPOO, adalah sebuah perusahaan alat elektronik konsumen asal Indonesia yang telah berhasil menembus pasar dalam negeri dan punya nama besar bahkan mancanegara. Didirikan pada tahun 1990.</p>
-                    <a href="index.html" class="btn btn-primary">Selengkapnya</a>
+                    <a href="#" class="btn btn-primary">Selengkapnya</a>
                 </div>
             </div>
 
@@ -81,7 +81,7 @@ if (!isset($_SESSION['user_id'])) {
                 <div class="card-body">
                     <h5 class="card-title">Panasonic</h5>
                     <p class="card-text">Panasonic, yang dulunya dikenal sebagai Matsushita Electric, adalah sebuah perusahaan multinasional asal Jepang yang telah menjadi salah satu pemimpin dalam industri elektronik dunia. Didirikan pada tahun 1918.</p>
-                    <a href="index.html" class="btn btn-primary">Selengkapnya</a>
+                    <a href="#" class="btn btn-primary">Selengkapnya</a>
                 </div>
             </div>
 
@@ -90,7 +90,7 @@ if (!isset($_SESSION['user_id'])) {
                 <div class="card-body">
                     <h5 class="card-title">SHARP</h5>
                     <p class="card-text">Sharp Corporation adalah sebuah perusahaan multinasional asal Jepang yang telah lama dikenal sebagai salah satu pemimpin dalam industri elektronik dan salah satu yang terbaik di Jepang. Didirikan pada tahun 1912.</p>
-                    <a href="index.html" class="btn btn-primary">Selengkapnya</a>
+                    <a href="#" class="btn btn-primary">Selengkapnya</a>
                 </div>
             </div>
             <!-- Add other brand cards here -->
@@ -116,7 +116,7 @@ if (!isset($_SESSION['user_id'])) {
        <div class="card-body">
          <h5 class="card-title">Masin Cuci</h5>
          <p class="card-text">Klik tombol dibawah untuk membuat kartu service.</p>
-         <a href="form.html" class="btn btn-primary">Service</a>
+         <a href="form.php" class="btn btn-primary">Service</a>
        </div>
      </div>
 
@@ -125,7 +125,7 @@ if (!isset($_SESSION['user_id'])) {
       <div class="card-body">
         <h5 class="card-title">TV</h5>
         <p class="card-text">Klik tombol dibawah untuk membuat kartu service.</p>
-        <a href="form.html" class="btn btn-primary">Service</a>
+        <a href="form.php" class="btn btn-primary">Service</a>
       </div>
     </div>
 
@@ -134,7 +134,7 @@ if (!isset($_SESSION['user_id'])) {
       <div class="card-body">
         <h5 class="card-title">Komputer</h5>
         <p class="card-text">Klik tombol dibawah untuk membuat kartu service.</p>
-        <a href="form.html" class="btn btn-primary">Service</a>
+        <a href="form.php" class="btn btn-primary">Service</a>
       </div>
     </div>
             <!-- Add other device cards here -->
