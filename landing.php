@@ -55,42 +55,49 @@ if (!isset($_SESSION['user_id'])) {
     <!-- Brand Cards -->
     <div class="container" style="margin-top: 100px;">
         <h2 style="margin-bottom: 20px;" id="brand">Brand</h2>
-        <div class="d-flex" style="justify-content: space-around;">
+        <div class="row"></div>
             <!-- Brand cards from original design -->
-            <div class="card" style="width: 18rem;">
-                <img src="Assets/Logo_LG.jpg" class="card-img-top" alt="..." style="height: 150px;">
-                <div class="card-body">
-                    <h5 class="card-title">LG</h5>
-                    <p class="card-text">LG, singkatan dari Lucky-Goldstar, adalah sebuah konglomerat multinasional yang telah menjadi nama besar dunia elektronik.</p>
-                    <a href="#" class="btn btn-primary">Selengkapnya</a>
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="card">
+                    <img src="Assets/Logo_LG.jpg" class="card-img-top" alt="..." style="height: 150px;">
+                    <div class="card-body">
+                        <h5 class="card-title">LG</h5>
+                        <p class="card-text">LG, singkatan dari Lucky-Goldstar, adalah sebuah konglomerat multinasional yang telah menjadi nama besar dunia elektronik.</p>
+                        <a href="#" class="btn btn-primary">Selengkapnya</a>
+                    </div>
                 </div>
             </div>
 
-
-            <div class="card" style="width: 18rem;">
-                <img src="Assets/Logo_DP.jpeg" class="card-img-top" alt="..." style="height: 150px;">
-                <div class="card-body">
-                    <h5 class="card-title">Denpoo</h5>
-                    <p class="card-text">Denpoo, ditulis sebagai DENPOO, adalah sebuah perusahaan alat elektronik konsumen asal Indonesia yang telah berhasil menembus pasar dalam negeri dan punya nama besar bahkan mancanegara. Didirikan pada tahun 1990.</p>
-                    <a href="#" class="btn btn-primary">Selengkapnya</a>
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="card">
+                    <img src="Assets/Logo_DP.jpeg" class="card-img-top" alt="..." style="height: 150px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Denpoo</h5>
+                        <p class="card-text">Denpoo, ditulis sebagai DENPOO, adalah sebuah perusahaan alat elektronik konsumen asal Indonesia yang telah berhasil menembus pasar dalam negeri dan punya nama besar bahkan mancanegara. Didirikan pada tahun 1990.</p>
+                        <a href="#" class="btn btn-primary">Selengkapnya</a>
+                    </div>
                 </div>
             </div>
 
-            <div class="card" style="width: 18rem;">
-                <img src="Assets/Logo_PAN.jpg" class="card-img-top" alt="..." style="height: 150px;">
-                <div class="card-body">
-                    <h5 class="card-title">Panasonic</h5>
-                    <p class="card-text">Panasonic, yang dulunya dikenal sebagai Matsushita Electric, adalah sebuah perusahaan multinasional asal Jepang yang telah menjadi salah satu pemimpin dalam industri elektronik dunia. Didirikan pada tahun 1918.</p>
-                    <a href="#" class="btn btn-primary">Selengkapnya</a>
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="card">
+                    <img src="Assets/Logo_PAN.jpg" class="card-img-top" alt="..." style="height: 150px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Panasonic</h5>
+                        <p class="card-text">Panasonic, yang dulunya dikenal sebagai Matsushita Electric, adalah sebuah perusahaan multinasional asal Jepang yang telah menjadi salah satu pemimpin dalam industri elektronik dunia. Didirikan pada tahun 1918.</p>
+                        <a href="#" class="btn btn-primary">Selengkapnya</a>
+                    </div>
                 </div>
             </div>
 
-            <div class="card" style="width: 18rem;">
-                <img src="Assets/Logo_SHA.jpg" class="card-img-top" alt="..." style="height: 150px;">
-                <div class="card-body">
-                    <h5 class="card-title">SHARP</h5>
-                    <p class="card-text">Sharp Corporation adalah sebuah perusahaan multinasional asal Jepang yang telah lama dikenal sebagai salah satu pemimpin dalam industri elektronik dan salah satu yang terbaik di Jepang. Didirikan pada tahun 1912.</p>
-                    <a href="#" class="btn btn-primary">Selengkapnya</a>
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="card">
+                    <img src="Assets/Logo_SHA.jpg" class="card-img-top" alt="..." style="height: 150px;">
+                    <div class="card-body">
+                        <h5 class="card-title">SHARP</h5>
+                        <p class="card-text">Sharp Corporation adalah sebuah perusahaan multinasional asal Jepang yang telah lama dikenal sebagai salah satu pemimpin dalam industri elektronik dan salah satu yang terbaik di Jepang. Didirikan pada tahun 1912.</p>
+                        <a href="#" class="btn btn-primary">Selengkapnya</a>
+                    </div>
                 </div>
             </div>
             <!-- Add other brand cards here -->
@@ -100,43 +107,51 @@ if (!isset($_SESSION['user_id'])) {
     <!-- Electronic Device Cards -->
     <div class="container" style="margin-top: 100px;">
         <h2 style="margin-bottom: 20px;">Alat Elektronik</h2>
-        <div class="d-flex" style="justify-content: space-around;">
+        <div class="row">
             <!-- Device cards from original design -->
-            <div class="card" style="width: 18rem;">
-                <img src="Assets/Kulkas.jpg" class="card-img-top" alt="..." style="height: 250px;">
-                <div class="card-body">
-                    <h5 class="card-title">Kulkas</h5>
-                    <p class="card-text">Klik tombol dibawah untuk membuat kartu service.</p>
-                    <a href="form.php" class="btn btn-primary">Service</a>
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="card">
+                    <img src="Assets/Kulkas.jpg" class="card-img-top" alt="..." style="height: 250px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Kulkas</h5>
+                        <p class="card-text">Klik tombol dibawah untuk membuat kartu service.</p>
+                        <a href="form.php" class="btn btn-primary">Service</a>
+                    </div>
                 </div>
             </div>
 
-            <div class="card" style="width: 18rem;">
-       <img src="Assets/MECU.jpg" class="card-img-top" alt="..." style="height: 250px;">
-       <div class="card-body">
-         <h5 class="card-title">Masin Cuci</h5>
-         <p class="card-text">Klik tombol dibawah untuk membuat kartu service.</p>
-         <a href="form.php" class="btn btn-primary">Service</a>
-       </div>
-     </div>
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="card">
+                    <img src="Assets/MECU.jpg" class="card-img-top" alt="..." style="height: 250px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Masin Cuci</h5>
+                        <p class="card-text">Klik tombol dibawah untuk membuat kartu service.</p>
+                        <a href="form.php" class="btn btn-primary">Service</a>
+                    </div>
+                </div>
+            </div>
 
-     <div class="card" style="width: 18rem;">
-      <img src="Assets/TV.jpg" class="card-img-top" alt="..." style="height: 250px;">
-      <div class="card-body">
-        <h5 class="card-title">TV</h5>
-        <p class="card-text">Klik tombol dibawah untuk membuat kartu service.</p>
-        <a href="form.php" class="btn btn-primary">Service</a>
-      </div>
-    </div>
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="card">
+                    <img src="Assets/TV.jpg" class="card-img-top" alt="..." style="height: 250px;">
+                    <div class="card-body">
+                        <h5 class="card-title">TV</h5>
+                        <p class="card-text">Klik tombol dibawah untuk membuat kartu service.</p>
+                        <a href="form.php" class="btn btn-primary">Service</a>
+                    </div>
+                </div>
+            </div>
 
-    <div class="card" style="width: 18rem;">
-      <img src="Assets/KOM.png" class="card-img-top" alt="..." style="height: 250px;">
-      <div class="card-body">
-        <h5 class="card-title">Komputer</h5>
-        <p class="card-text">Klik tombol dibawah untuk membuat kartu service.</p>
-        <a href="form.php" class="btn btn-primary">Service</a>
-      </div>
-    </div>
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="card">
+                    <img src="Assets/KOM.png" class="card-img-top" alt="..." style="height: 250px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Komputer</h5>
+                        <p class="card-text">Klik tombol dibawah untuk membuat kartu service.</p>
+                        <a href="form.php" class="btn btn-primary">Service</a>
+                    </div>
+                </div>
+            </div>
             <!-- Add other device cards here -->
         </div>
     </div>
