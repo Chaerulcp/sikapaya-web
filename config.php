@@ -1,7 +1,7 @@
 <?php
 $host = 'sikapayya.com';
-$dbname = 'u609729740_sikapaiyya';
-$username = 'u609729740_root';
+$dbname = 'sikapaiyya';
+$username = 'root';
 $password = ':bG7w*n$o1Dw';
 
 try {
