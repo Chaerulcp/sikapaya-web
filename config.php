@@ -2,7 +2,7 @@
 $host = 'https://sikapayya.com/';
 $dbname = 'u609729740_sikapaiyya';
 $username = 'u609729740_root';
-$password = '5Ix>2=El';
+$password = ':bG7w*n$o1Dw';
 
 try {
     $db = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
