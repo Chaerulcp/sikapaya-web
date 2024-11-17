@@ -1,5 +1,5 @@
 <?php
-$host = 'sikapayya.com';
+$host = 'https://sikapayya.com/';
 $dbname = 'u609729740_sikapaiyya';
 $username = 'u609729740_root';
 $password = '5Ix>2=El';
