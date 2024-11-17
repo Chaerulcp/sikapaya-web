@@ -54,7 +54,7 @@ if(isset($_POST['login'])) {
                     </div>   
                     <button type="submit" name="login" class="btn btn-primary">Login</button>
                     <a href="daftar.php" class="btn btn-warning">Daftar</a>
-                    <button type="button" class="btn btn-link">Lupa password</button>
+                    <button type="button" class="btn btn-link" onclick="location.href='lupa_password.php'">Lupa password</button>
                 </form>
             </div>
         </div>
