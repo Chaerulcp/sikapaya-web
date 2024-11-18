@@ -1,24 +1,21 @@
 <?php
-session_start();
+session_start(); // Memulai sesi
 require_once 'config.php';
 
+if (!isset($_SESSION['user_id'])) {
+    header("Location: index.php");
+    exit();
+}
 
-
-if(!isset($_SESSION['user_id'])) {
-$user = $stmt->fetch(PDO::FETCH_ASSOC);
+// Ambil data user berdasarkan ID dari sesi
+$stmt = $db->prepare("SELECT * FROM users WHERE id = ?");
+$stmt->execute([$_SESSION['user_id']]);
+$user = $stmt->fetch();
 
 if (!$user) {
     header("Location: index.php");
     exit();
 }
-    exit();
-}
-
-// Ambil data user
-// Ambil data user
-$stmt = $db->prepare("SELECT * FROM users WHERE id = ?");
-$stmt->execute([$_SESSION['user_id']]);
-$user = $stmt->fetch();
 
 // Proses update password
 if(isset($_POST['update_password'])) {
