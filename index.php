@@ -5,7 +5,19 @@ if (isset($_SESSION['message'])) {
     unset($_SESSION['message']);
 }
 
+session_start();
 require_once 'config.php';
+
+if (isset($_SESSION['user_id'])) {
+    // Jika pengguna sudah login, redirect ke halaman sesuai role
+    if ($_SESSION['role'] == 'admin') {
+        header("Location: service.php");
+        exit();
+    } else {
+        header("Location: landing.php");
+        exit();
+    }
+}
 
 if (isset($_POST['login'])) {
     $email = $_POST['email'];
@@ -19,18 +31,18 @@ if (isset($_POST['login'])) {
         if ($user['is_active'] == 0) {
             $error = "Akun Anda belum diaktifkan. Silakan periksa email Anda untuk konfirmasi.";
         } else {
+            // Set variabel sesi untuk pengguna yang login
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['role'] = $user['role'];
             $_SESSION['nama'] = $user['nama'];
             
-            switch ($user['role']) {
-                case 'admin':
-                    header("Location: service.php");
-                    break;
-                default:
-                    header("Location: landing.php");
-                    break;
+            // Redirect ke halaman sesuai role
+            if ($user['role'] == 'admin') {
+                header("Location: service.php");
+            } else {
+                header("Location: landing.php");
             }
+            exit();
         }
     } else {
         $error = "Email atau password salah!";
