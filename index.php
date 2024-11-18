@@ -23,10 +23,13 @@ if (isset($_POST['login'])) {
             $_SESSION['role'] = $user['role'];
             $_SESSION['nama'] = $user['nama'];
             
-            if ($user['role'] == 'admin') {
-                header("Location: service.php");
-            } else {
-                header("Location: landing.php");
+            switch ($user['role']) {
+                case 'admin':
+                    header("Location: service.php");
+                    break;
+                default:
+                    header("Location: landing.php");
+                    break;
             }
         }
     } else {
