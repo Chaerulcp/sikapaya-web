@@ -2,18 +2,7 @@
 session_start();
 require_once 'config.php';
 
-// Define database connection details
-$dsn = 'mysql:host=localhost;dbname=u609729740_sikapaiyya';
-$username = 'u609729740_root';
-$password = ':bG7w*n$o1Dw';
 
-// Initialize database connection
-try {
-    $db = new PDO($dsn, $username, $password);
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Database connection failed: " . $e->getMessage());
-}
 
 if(!isset($_SESSION['user_id'])) {
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
