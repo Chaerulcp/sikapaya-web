@@ -7,6 +7,7 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
+
 // Fungsi untuk memeriksa status chat
 function isChatActive($chatSession)
 {
