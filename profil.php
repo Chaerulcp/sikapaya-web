@@ -2,8 +2,21 @@
 session_start();
 require_once 'config.php';
 
+// Initialize database connection
+try {
+    $db = new PDO($dsn, $username, $password);
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Database connection failed: " . $e->getMessage());
+}
+
 if(!isset($_SESSION['user_id'])) {
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$user) {
     header("Location: index.php");
+    exit();
+}
     exit();
 }
 
