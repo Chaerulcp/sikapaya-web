@@ -10,3 +10,4 @@ try {
 } catch(PDOException $e) {
     echo "Koneksi gagal: " . $e->getMessage();
 }
+?>
