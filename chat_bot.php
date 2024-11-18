@@ -2,7 +2,7 @@
 session_start();
 require_once 'config.php';
 
-if(!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id'])) {
     header("Location: index.php");
     exit();
 }
@@ -22,7 +22,7 @@ try {
 
         if ($chatSession) {
             $sender_id = $_SESSION['user_id'];
-            
+
             // Kirim pesan selamat datang
             $welcomeMessage = "Selamat datang di Layanan Chat Sikapaiyya! 👋\n\nSaya Bot Sikapaiyya, siap membantu Anda.";
             $stmt = $db->prepare("INSERT INTO chats (sender_id, message, session_id, is_bot_message) VALUES (?, ?, ?, TRUE)");
@@ -109,7 +109,7 @@ Atau sebutkan nomor service untuk pengecekan cepat.";
 Mohon tunggu sebentar...
 
 Waktu estimasi: 5-10 menit pada jam operasional.";
-                        
+
                         // Update session untuk menandai perlu admin
                         $stmt = $db->prepare("UPDATE chat_sessions SET needs_admin = TRUE WHERE id = ?");
                         $stmt->execute([$chatSessionId]);
