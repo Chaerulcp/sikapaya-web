@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
 }
 
 // Inisialisasi pesan error
-$error_message = isset($_SESSION['error']) ? $_SESSION['error'] : '';
+$error_message = $_SESSION['error'] ?? '';
 unset($_SESSION['error']); // Clear the error message after displaying
 
 // Fungsi untuk mendapatkan nama admin
@@ -51,7 +51,7 @@ if (isset($_GET['session_id'])) {
 
                 // Tambahkan pesan sistem bahwa admin telah bergabung
                 $admin_name = getAdminName($db, $_SESSION['user_id']);
-                $joinMessage = "Admin " . $admin_name . " telah bergabung dalam chat";
+                $joinMessage = "Admin {$admin_name} telah bergabung dalam chat";
                 $stmt = $db->prepare("INSERT INTO chats (session_id, sender_id, message, is_system_message) 
                                     VALUES (?, ?, ?, TRUE)");
                 $stmt->execute([$session_id, $_SESSION['user_id'], $joinMessage]);
@@ -91,7 +91,7 @@ if (isset($_POST['send_message']) && !empty($_POST['message'])) {
         $stmt = $db->prepare("INSERT INTO chats (sender_id, message, session_id) VALUES (?, ?, ?)");
         $stmt->execute([$sender_id, $messageText, $session_id]);
 
-        header("Location: admin_chat.php?session_id=" . $session_id);
+        header("Location: admin_chat.php?session_id={$session_id}");
         exit();
     } catch (PDOException $e) {
         $_SESSION['error'] = "Terjadi kesalahan saat mengirim pesan: " . $e->getMessage();
@@ -120,7 +120,7 @@ if (isset($_POST['end_chat'])) {
 
         if ($chat_user) {
             // Tambahkan pesan sistem tentang pengakhiran chat
-            $endMessage = "Chat telah diakhiri oleh admin " . $admin_name;
+            $endMessage = "Chat telah diakhiri oleh admin {$admin_name}";
             $stmt = $db->prepare("INSERT INTO chats (session_id, sender_id, message, is_system_message) 
                                 VALUES (?, ?, ?, TRUE)");
             $stmt->execute([$session_id, $_SESSION['user_id'], $endMessage]);
@@ -212,7 +212,7 @@ if (isset($_POST['end_chat'])) {
 <body>
     <!--Navbar-->
     <nav class="navbar navbar-expand-lg navbar-light bg-primary fixed-top">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <a class="navbar-brand fw-bold text-white" href="#">Sikapaiyya</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
                 <span class="navbar-toggler-icon"></span>
