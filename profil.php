@@ -8,9 +8,10 @@ if(!isset($_SESSION['user_id'])) {
 }
 
 // Ambil data user
-$stmt = $db->prepare("SELECT * FROM users WHERE id = ?");
-$stmt->execute([$_SESSION['user_id']]);
-$user = $stmt->fetch();
+$stmt = $db->prepare("SELECT * FROM users WHERE id = :id");
+$stmt->bindParam(':id', $_SESSION['user_id'], PDO::PARAM_INT);
+$stmt->execute();
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 // Proses update password
 if(isset($_POST['update_password'])) {
@@ -28,10 +29,14 @@ if(isset($_POST['update_password'])) {
     }
     else {
         try {
-            // Update password
+            // Hash the new password
             $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
-            $stmt = $db->prepare("UPDATE users SET password = ? WHERE id = ?");
-            $stmt->execute([$hashed_password, $_SESSION['user_id']]);
+            
+            // Update password
+            $stmt = $db->prepare("UPDATE users SET password = :password WHERE id = :id");
+            $stmt->bindParam(':password', $hashed_password, PDO::PARAM_STR);
+            $stmt->bindParam(':id', $_SESSION['user_id'], PDO::PARAM_INT);
+            $stmt->execute();
             $success = "Password berhasil diperbarui!";
         } catch(PDOException $e) {
             $error = "Terjadi kesalahan: " . $e->getMessage();
