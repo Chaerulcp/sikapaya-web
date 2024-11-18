@@ -1,12 +1,12 @@
 <?php
+require_once 'config.php';
+
 session_start();
 if (isset($_SESSION['message'])) {
     echo '<div class="alert alert-success text-center">' . $_SESSION['message'] . '</div>';
     unset($_SESSION['message']);
 }
 
-session_start();
-require_once 'config.php';
 
 if (isset($_SESSION['user_id'])) {
     // Jika pengguna sudah login, redirect ke halaman sesuai role
