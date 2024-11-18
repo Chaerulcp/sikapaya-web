@@ -17,6 +17,7 @@ if(!isset($_SESSION['user_id'])) {
     exit();
 }
 
+
 // Ambil data user
 $stmt = $db->prepare("SELECT * FROM users WHERE id = ?");
 $stmt->execute([$_SESSION['user_id']]);
