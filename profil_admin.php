@@ -2,13 +2,20 @@
 session_start();
 require_once 'config.php';
 
+$db = new PDO($dsn, $username, $password); // Ensure $db is initialized
+
 if(!isset($_SESSION['user_id'])) {
     header("Location: index.php");
     exit();
 }
 
 // Ambil data user
-$stmt = $db->prepare("SELECT * FROM users WHERE id = ?");
+$user = $stmt->fetch();
+
+if (!$user) {
+    header("Location: index.php");
+    exit();
+}
 $stmt->execute([$_SESSION['user_id']]);
 $user = $stmt->fetch();
 
