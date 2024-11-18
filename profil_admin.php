@@ -1,24 +1,13 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-session_start();
+session_start(); // Memulai sesi
 require_once 'config.php';
 
-try {
-    $db = new PDO($dsn, $username, $password); // Ensure $db is initialized
-} catch (PDOException $e) {
-    die("Database connection failed: " . $e->getMessage());
-}
-
-if(!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id'])) {
     header("Location: index.php");
     exit();
 }
 
-
-// Ambil data user
+// Ambil data user berdasarkan ID dari sesi
 $stmt = $db->prepare("SELECT * FROM users WHERE id = ?");
 $stmt->execute([$_SESSION['user_id']]);
 $user = $stmt->fetch();
