@@ -15,10 +15,10 @@ if (!$user) {
 }
 
 // Ambil data user
-$stmt = $db->prepare("SELECT * FROM users WHERE id = :id");
-$stmt->bindParam(':id', $_SESSION['user_id'], PDO::PARAM_INT);
-$stmt->execute();
-$user = $stmt->fetch(PDO::FETCH_ASSOC);
+// Ambil data user
+$stmt = $db->prepare("SELECT * FROM users WHERE id = ?");
+$stmt->execute([$_SESSION['user_id']]);
+$user = $stmt->fetch();
 
 // Proses update password
 if(isset($_POST['update_password'])) {
