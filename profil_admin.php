@@ -1,8 +1,16 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 session_start();
 require_once 'config.php';
 
-$db = new PDO($dsn, $username, $password); // Ensure $db is initialized
+try {
+    $db = new PDO($dsn, $username, $password); // Ensure $db is initialized
+} catch (PDOException $e) {
+    die("Database connection failed: " . $e->getMessage());
+}
 
 if(!isset($_SESSION['user_id'])) {
     header("Location: index.php");
