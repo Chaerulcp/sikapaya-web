@@ -1,12 +1,14 @@
 <?php
+session_start(); // Memulai sesi
 require_once 'config.php';
 
-session_start();
 if (isset($_SESSION['message'])) {
     echo '<div class="alert alert-success text-center">' . $_SESSION['message'] . '</div>';
     unset($_SESSION['message']);
 }
 
+session_start(); // Memulai sesi
+require_once 'config.php';
 
 if (isset($_SESSION['user_id'])) {
     // Jika pengguna sudah login, redirect ke halaman sesuai role
@@ -22,20 +24,21 @@ if (isset($_SESSION['user_id'])) {
 if (isset($_POST['login'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
-    
+
     $stmt = $db->prepare("SELECT * FROM users WHERE email = ?");
     $stmt->execute([$email]);
     $user = $stmt->fetch();
-    
+
     if ($user && password_verify($password, $user['password'])) {
         if ($user['is_active'] == 0) {
             $error = "Akun Anda belum diaktifkan. Silakan periksa email Anda untuk konfirmasi.";
         } else {
-            // Set variabel sesi untuk pengguna yang login
+            // Regenerasi ID sesi untuk keamanan
+            session_regenerate_id(true);
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['role'] = $user['role'];
             $_SESSION['nama'] = $user['nama'];
-            
+
             // Redirect ke halaman sesuai role
             if ($user['role'] == 'admin') {
                 header("Location: service.php");
