@@ -10,14 +10,14 @@ if(!isset($_SESSION['user_id'])) {
 }
 
 // Ambil data user
+$stmt = $db->prepare("SELECT * FROM users WHERE id = ?");
+$stmt->execute([$_SESSION['user_id']]);
 $user = $stmt->fetch();
 
 if (!$user) {
     header("Location: index.php");
     exit();
 }
-$stmt->execute([$_SESSION['user_id']]);
-$user = $stmt->fetch();
 
 // Proses update password
 if(isset($_POST['update_password'])) {
