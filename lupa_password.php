@@ -28,12 +28,12 @@ if (isset($_POST['reset_password'])) {
         try {
             // Konfigurasi server
             $mail->isSMTP();
-            $mail->Host = 'smtp.titan.email'; // Ganti dengan host SMTP Anda
+            $mail->Host = 'live.smtp.mailtrap.io'; // Ganti dengan host SMTP Anda
             $mail->SMTPAuth = true;
-            $mail->Username = 'no-reply@chaerulcp.software'; // Ganti dengan email Anda
-            $mail->Password = 'QRY2WH4X'; // Ganti dengan password email Anda
+            $mail->Username = 'smtp@mailtrap.io'; // Ganti dengan email Anda
+            $mail->Password = '733149af4c4fa31dba61365cfd7d7289'; // Ganti dengan password email Anda
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port = 465; // Port untuk TLS
+            $mail->Port = 587; // Port untuk TLS
 
             // Penerima
             $mail->setFrom('admin@sikapaiya.com', 'Sikapaiyya');
