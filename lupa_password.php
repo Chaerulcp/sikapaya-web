@@ -28,7 +28,7 @@ if (isset($_POST['reset_password'])) {
         try {
             // Konfigurasi server
             $mail->isSMTP();
-            $mail->Host = 'smtp0101.titan.email'; // Ganti dengan host SMTP Anda
+            $mail->Host = 'smtp.titan.email'; // Ganti dengan host SMTP Anda
             $mail->SMTPAuth = true;
             $mail->Username = 'no-reply@chaerulcp.software'; // Ganti dengan email Anda
             $mail->Password = '@Chaerul12345'; // Ganti dengan password email Anda
