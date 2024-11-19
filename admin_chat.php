@@ -147,9 +147,9 @@ if (isset($_POST['end_chat'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <title>Admin Chat</title>
     <style>
         .chat-container {
@@ -214,7 +214,7 @@ if (isset($_POST['end_chat'])) {
       <nav class="navbar navbar-expand-lg navbar-light bg-primary fixed-top">
         <div class="container">
             <a class="navbar-brand fw-bold text-white" href="#">Sikapaiyya</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"></button>
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -228,13 +228,13 @@ if (isset($_POST['end_chat'])) {
                         </a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown">
                             Pengaturan
                         </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item text-primary" href="profil_admin.php">Profile</a></li>
-                            <li><a class="dropdown-item text-primary" href="logout.php">Keluar</a></li>
-                        </ul>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item text-primary" href="profil_admin.php">Profile</a>
+                            <a class="dropdown-item text-primary" href="logout.php">Keluar</a>
+                        </div>
                     </li>
                 </ul>
             </div>
