@@ -41,7 +41,7 @@ if (isset($_POST['reset_password'])) {
 
             // Konten email
             $mail->isHTML(true);
-            $resetLink = "http://sikapayya.com/sikapaya-web/reset_password.php?token=" . $token; // Ganti dengan domain Anda
+            $resetLink = "http://sikapayya.com/reset_password.php?token=" . $token; // Ganti dengan domain Anda
             $mail->Subject = 'Reset Password';
             $mail->Body    = "
                 <html>
