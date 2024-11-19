@@ -210,9 +210,9 @@ if (isset($_POST['end_chat'])) {
     </style>
 </head>
 <body>
-    <!--Navbar-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-primary fixed-top">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-primary fixed-top">
+        <div class="container">
             <a class="navbar-brand fw-bold text-white" href="#">Sikapaiyya</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
                 <span class="navbar-toggler-icon"></span>
@@ -223,9 +223,30 @@ if (isset($_POST['end_chat'])) {
                         <a class="nav-link text-white" href="service.php">Service List</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="admin_chat.php">Chat</a>
+                        <a class="nav-link text-white position-relative" href="admin_chat.php">
+                            Chat
+                            <?php 
+                            // Hitung jumlah chat aktif yang belum ditangani admin lain
+                            $stmt = $db->prepare("SELECT COUNT(*) FROM chat_sessions 
+                                               WHERE is_active = TRUE 
+                                               AND (admin_id IS NULL OR admin_id = ?)");
+                            $stmt->execute([$_SESSION['user_id']]);
+                            $activeChats = $stmt->fetchColumn();
+                            if($activeChats > 0): 
+                            ?>
+                                <span class="badge bg-danger"><?= $activeChats ?></span>
+                            <?php endif; ?>
+                        </a>
                     </li>
-                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown">
+                            Pengaturan
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item text-primary" href="profil_admin.php">Profile</a></li>
+                            <li><a class="dropdown-item text-primary" href="logout.php">Keluar</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
