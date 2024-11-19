@@ -143,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['status']) && isset($_P
     $mail = new PHPMailer(true);
     try {
         $mail->isSMTP();
-        $mail->Host = 'smtp.googlemail.com'; // Ganti dengan host SMTP Anda
+        $mail->Host = 'smtp.gmail.com'; // Ganti dengan host SMTP Anda
         $mail->SMTPAuth = true;
         $mail->Username = 'no.reply.sikapayya@gmail.com'; // Ganti dengan username SMTP Anda
         $mail->Password = 'ypzhzsfzerjfndmd'; // Ganti dengan password SMTP Anda
