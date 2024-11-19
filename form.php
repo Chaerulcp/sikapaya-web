@@ -7,9 +7,15 @@ if(!isset($_SESSION['user_id'])) {
     exit();
 }
 
+$user_id = $_SESSION['user_id'];
+
+// Fetch the user's name from the database
+$stmt = $db->prepare("SELECT nama FROM users WHERE id = ?");
+$stmt->execute([$user_id]);
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+$nama = $user['nama'];
+
 if(isset($_POST['submit'])) {
-    $user_id = $_SESSION['user_id'];
-    $nama = $_POST['nama'];
     $alamat = $_POST['alamat'];
     $tanggal = $_POST['tanggal'];
     $nohp = $_POST['nohp'];
@@ -17,7 +23,7 @@ if(isset($_POST['submit'])) {
     $jenis_alat = $_POST['jenis_alat'];
     $kerusakan = $_POST['kerusakan'];
     $metode_pembayaran = $_POST['metode_pembayaran'];
-    $catatan = $_POST ['catatan'];
+    $catatan = $_POST['catatan'];
 
     $stmt = $db->prepare("INSERT INTO service (user_id, nama, alamat, tanggal, no_hp, merk, jenis_alat, kerusakan, metode_pembayaran, catatan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $stmt->execute([$user_id, $nama, $alamat, $tanggal, $nohp, $merk, $jenis_alat, $kerusakan, $metode_pembayaran, $catatan]);
@@ -63,7 +69,7 @@ if(isset($_POST['submit'])) {
         <form method="POST">
             <div class="mb-3">
                 <label for="nama" class="form-label">Nama</label>
-                <input type="text" class="form-control" id="nama" name="nama" required>
+                <input type="text" class="form-control" id="nama" name="nama" value="<?php echo htmlspecialchars($nama); ?>" readonly>
             </div>
             <div class="mb-3">
                 <label for="alamat" class="form-label">Alamat</label>
@@ -96,7 +102,7 @@ if(isset($_POST['submit'])) {
                     <option value="Kartu Kredit">Kartu Kredit</option>
                     <option value="E-Wallet">E-Wallet</option>
                 </select>
- </div>
+            </div>
             <div class="mb-3">
                 <label for="catatan" class="form-label">Catatan</label>
                 <textarea class="form-control" id="catatan" name="catatan"></textarea>
