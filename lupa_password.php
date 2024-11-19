@@ -31,7 +31,7 @@ if (isset($_POST['reset_password'])) {
             $mail->Host = 'smtp.titan.email'; // Ganti dengan host SMTP Anda
             $mail->SMTPAuth = true;
             $mail->Username = 'no-reply@chaerulcp.software'; // Ganti dengan email Anda
-            $mail->Password = '@Chaerul12345'; // Ganti dengan password email Anda
+            $mail->Password = 'QRY2WH4X'; // Ganti dengan password email Anda
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 465; // Port untuk TLS
 
