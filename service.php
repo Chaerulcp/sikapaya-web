@@ -1,6 +1,7 @@
 <?php
 
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 session_start();
 require_once 'config.php';
@@ -64,7 +65,7 @@ $services = $stmt->fetchAll();
                         <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown">
                             Pengaturan
                         </a>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu"></ul>
                             <li><a class="dropdown-item text-primary" href="profil_admin.php">Profile</a></li>
                             <li><a class="dropdown-item text-primary" href="logout.php">Keluar</a></li>
                         </ul>
@@ -143,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['status']) && isset($_P
     $mail = new PHPMailer(true);
     try {
         $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com'; // Ganti dengan host SMTP Anda
+        $mail->Host = 'smtp.googlemail.com'; // Ganti dengan host SMTP Anda
         $mail->SMTPAuth = true;
         $mail->Username = 'no.reply.sikapayya@gmail.com'; // Ganti dengan username SMTP Anda
         $mail->Password = 'ypzhzsfzerjfndmd'; // Ganti dengan password SMTP Anda
