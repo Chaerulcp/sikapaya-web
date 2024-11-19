@@ -31,7 +31,7 @@ if (isset($_POST['reset_password'])) {
             $mail->Host = 'smtp.googlemail.com'; // Ganti dengan host SMTP Anda
             $mail->SMTPAuth = true;
             $mail->Username = 'chaerulcp.me@gmail.com'; // Ganti dengan email Anda
-            $mail->Password = '33213365'; // Ganti dengan password email Anda
+            $mail->Password = 'esfautokqlvtyaov'; // Ganti dengan password email Anda
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587; // Port untuk TLS
 
