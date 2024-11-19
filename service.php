@@ -33,45 +33,45 @@ $services = $stmt->fetchAll();
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-primary fixed-top"></nav>
-    <div class="container"></div>
-    <a class="navbar-brand fw-bold text-white" href="#">Sikapaiyya</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-            <li class="nav-item"></li>
-            <a class="nav-link text-white" href="service.php">Service List</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white position-relative" href="admin_chat.php">
-                    Chat
-                    <?php
-                    // Hitung jumlah chat aktif yang belum ditangani admin lain
-                    $stmt = $db->prepare("SELECT COUNT(*) FROM chat_sessions 
-                                               WHERE is_active = TRUE 
-                                               AND (admin_id IS NULL OR admin_id = ?)");
-                    $stmt->execute([$_SESSION['user_id']]);
-                    $activeChats = $stmt->fetchColumn();
-                    if ($activeChats > 0):
-                    ?>
-                        <span class="badge bg-danger"><?= $activeChats ?></span>
-                    <?php endif; ?>
-                </a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown">
-                    Pengaturan
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item text-primary" href="profil_admin.php">Profile</a></li>
-                    <li><a class="dropdown-item text-primary" href="logout.php">Keluar</a></li>
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-white" href="#">Sikapaiyya</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="service.php">Service List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white position-relative" href="admin_chat.php">
+                            Chat
+                            <?php
+                            // Hitung jumlah chat aktif yang belum ditangani admin lain
+                            $stmt = $db->prepare("SELECT COUNT(*) FROM chat_sessions 
+                                                   WHERE is_active = TRUE 
+                                                   AND (admin_id IS NULL OR admin_id = ?)");
+                            $stmt->execute([$_SESSION['user_id']]);
+                            $activeChats = $stmt->fetchColumn();
+                            if ($activeChats > 0):
+                            ?>
+                                <span class="badge bg-danger"><?= $activeChats ?></span>
+                            <?php endif; ?>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown">
+                            Pengaturan
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item text-primary" href="profil_admin.php">Profile</a></li>
+                            <li><a class="dropdown-item text-primary" href="logout.php">Keluar</a></li>
+                        </ul>
+                    </li>
                 </ul>
-            </li>
-        </ul>
-    </div>
-    </div>
+            </div>
+        </div>
     </nav>
 
     <!-- Service List -->
@@ -124,6 +124,7 @@ $services = $stmt->fetchAll();
 </body>
 
 </html>
+
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['status']) && isset($_POST['id'])) {
     $status = $_POST['status'];
@@ -188,30 +189,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['status']) && isset($_P
             </style>
         </head>
         <body>
-              <div class='header'>
-
-                <h1>Sikapaiyya</h1>
-
-             </div>
-
-              <div class='content'>
-
-                   <p>Yth. Pelanggan,</p>
-
+            <div class='container'>
+                <div class='header'>
+                    <h1>Sikapaiyya</h1>
+                </div>
+                <div class='content'>
+                    <p>Yth. Pelanggan,</p>
                     <p>Kami ingin memberitahukan bahwa status permintaan layanan Anda (ID: {$id}) telah diperbarui menjadi: <strong>{$status}</strong>.</p>
-
-                     <p>Terima kasih telah menggunakan layanan kami.</p>
-
-                  </div>
-
-                   <div class='footer'>
-
-                        <p>Salam hormat,<br>Tim Sikapaiyya</p>
-
-                     </div>
-
-                      </div>
-
+                    <p>Terima kasih telah menggunakan layanan kami.</p>
+                </div>
+                <div class='footer'>
+                    <p>Salam hormat,<br>Tim Sikapaiyya</p>
                 </div>
             </div>
         </body>
