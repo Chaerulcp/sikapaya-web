@@ -114,3 +114,44 @@ $services = $stmt->fetchAll();
     <script src="js/popper.min.js"></script>
 </body>
 </html>
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['status']) && isset($_POST['id'])) {
+    $status = $_POST['status'];
+    $id = $_POST['id'];
+
+    // Update status in the database
+    $stmt = $db->prepare("UPDATE service SET status = ? WHERE id = ?");
+    $stmt->execute([$status, $id]);
+
+    // Get user email
+    $stmt = $db->prepare("SELECT email FROM users WHERE id = (SELECT user_id FROM service WHERE id = ?)");
+    $stmt->execute([$id]);
+    $userEmail = $stmt->fetchColumn();
+
+    // Send email notification
+    $to = $userEmail;
+    $subject = "Service Status Update";
+    $message = "
+    <html>
+    <head>
+        <title>Service Status Update</title>
+    </head>
+    <body>
+        <p>Dear Customer,</p>
+        <p>We would like to inform you that the status of your service request (ID: $id) has been updated to: <strong>$status</strong>.</p>
+        <p>Thank you for using our service.</p>
+        <p>Best regards,<br>Sikapaiyya Team</p>
+    </body>
+    </html>
+    ";
+    $headers = "MIME-Version: 1.0" . "\r\n";
+    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+    $headers .= 'From: <no-reply@sikapaiyya.com>' . "\r\n";
+
+    mail($to, $subject, $message, $headers);
+
+    // Redirect back to the service list
+    header("Location: service.php");
+    exit();
+}
+?>
