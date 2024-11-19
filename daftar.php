@@ -32,10 +32,10 @@ if(isset($_POST['daftar'])) {
             // Kirim email konfirmasi
             $mail = new PHPMailer(true);
             $mail->isSMTP();
-            $mail->Host = 'sandbox.smtp.mailtrap.io'; // Ganti dengan host SMTP Anda
+            $mail->Host = 'smtp.googlemail.com'; // Ganti dengan host SMTP Anda
             $mail->SMTPAuth = true;
-            $mail->Username = 'e3f723ebd69e2c'; // Ganti dengan username SMTP Anda
-            $mail->Password = '1104d73e3852b9'; // Ganti dengan password SMTP Anda
+            $mail->Username = 'no.reply.sikapayya@gmail.com'; // Ganti dengan username SMTP Anda
+            $mail->Password = 'ypzhzsfzerjfndmd'; // Ganti dengan password SMTP Anda
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587; // Port untuk TLS
 
