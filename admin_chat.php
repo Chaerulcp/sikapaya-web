@@ -223,19 +223,8 @@ if (isset($_POST['end_chat'])) {
                         <a class="nav-link text-white" href="service.php">Service List</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white position-relative" href="admin_chat.php">
+                        <a class="nav-link text-white position-relative" href="#">
                             Chat
-                            <?php 
-                            // Hitung jumlah chat aktif yang belum ditangani admin lain
-                            $stmt = $db->prepare("SELECT COUNT(*) FROM chat_sessions 
-                                               WHERE is_active = TRUE 
-                                               AND (admin_id IS NULL OR admin_id = ?)");
-                            $stmt->execute([$_SESSION['user_id']]);
-                            $activeChats = $stmt->fetchColumn();
-                            if($activeChats > 0): 
-                            ?>
-                                <span class="badge bg-danger"><?= $activeChats ?></span>
-                            <?php endif; ?>
                         </a>
                     </li>
                     <li class="nav-item dropdown">
