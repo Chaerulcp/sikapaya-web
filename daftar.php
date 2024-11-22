@@ -32,14 +32,14 @@ if(isset($_POST['daftar'])) {
             // Kirim email konfirmasi
             $mail = new PHPMailer(true);
             $mail->isSMTP();
-            $mail->Host = 'smtp.googlemail.com'; // Ganti dengan host SMTP Anda
+            $mail->Host = 'smtp.hostinger.com'; // Ganti dengan host SMTP Anda
             $mail->SMTPAuth = true;
-            $mail->Username = 'no.reply.sikapayya@gmail.com'; // Ganti dengan username SMTP Anda
-            $mail->Password = 'ypzhzsfzerjfndmd'; // Ganti dengan password SMTP Anda
+            $mail->Username = 'no-reply@sikapayya.com'; // Ganti dengan username SMTP Anda
+            $mail->Password = '@Sikapayya123'; // Ganti dengan password SMTP Anda
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587; // Port untuk TLS
 
-            $mail->setFrom('admin@sikapaiyya.com', 'Sikapaiyya');
+            $mail->setFrom('no-reply@sikapayya.com', 'Sikapayya');
             $mail->addAddress($email);
             $mail->Subject = 'Konfirmasi Akun';
             $mail->isHTML(true);
