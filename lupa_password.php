@@ -33,7 +33,7 @@ if (isset($_POST['reset_password'])) {
             $mail->Username = 'no-replay@sikapayya.com'; // Ganti dengan email Anda
             $mail->Password = '@Sikapayya123'; // Ganti dengan password email Anda
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port = 465; // Port untuk TLS
+            $mail->Port = 587; // Port untuk TLS
 
             // Penerima
             $mail->setFrom('no-replay@sikapayya.com', 'Sikapaiyya');
