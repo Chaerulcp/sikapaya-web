@@ -28,15 +28,15 @@ if (isset($_POST['reset_password'])) {
         try {
             // Konfigurasi server
             $mail->isSMTP();
-            $mail->Host = 'smtp.googlemail.com'; // Ganti dengan host SMTP Anda
+            $mail->Host = 'smtp.hostinger.com'; // Ganti dengan host SMTP Anda
             $mail->SMTPAuth = true;
-            $mail->Username = 'no.reply.sikapayya@gmail.com'; // Ganti dengan email Anda
-            $mail->Password = 'ypzhzsfzerjfndmd'; // Ganti dengan password email Anda
+            $mail->Username = 'no-replay@sikapayya.com'; // Ganti dengan email Anda
+            $mail->Password = '@Sikapayya123'; // Ganti dengan password email Anda
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port = 587; // Port untuk TLS
+            $mail->Port = 465; // Port untuk TLS
 
             // Penerima
-            $mail->setFrom('admin@sikapaiya.com', 'Sikapaiyya');
+            $mail->setFrom('no-replay@sikapayya.com', 'Sikapaiyya');
             $mail->addAddress($email);
 
             // Konten email
