@@ -120,3 +120,16 @@ if(isset($_POST['submit'])) {
     <script src="js/popper.min.js"></script>
 </body>
 </html>
+<?php
+$jenis_alat = isset($_GET['jenis']) ? $_GET['jenis'] : '';
+?>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var jenisAlatInput = document.getElementById('jenis_alat');
+        var jenisAlatValue = "<?php echo htmlspecialchars($jenis_alat); ?>";
+        if (jenisAlatValue) {
+            jenisAlatInput.value = jenisAlatValue;
+        }
+    });
+</script>
