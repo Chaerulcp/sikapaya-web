@@ -1,7 +1,4 @@
 <?php
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 session_start();
 require_once 'config.php';
 
@@ -42,77 +39,6 @@ function getStatusClass($status) {
             return 'badge bg-primary';
         default:
             return 'badge bg-secondary';
-    }
-}
-
-function sendStatusUpdateEmail($email, $name, $status) {
-    $mail = new PHPMailer(true);
-
-    try {
-        //Server settings
-        $mail->isSMTP();
-        $mail->Host = 'smtp.hostinger.com';
-        $mail->SMTPAuth = true;
-        $mail->Username = 'no-reply@sikapayya.com';
-        $mail->Password = '@Sikapayya123';
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port = 587;
-
-        //Recipients
-        $mail->setFrom('your_email@example.com', 'Sikapaiyya');
-        $mail->addAddress($email, $name);
-
-        //Content
-        $mail->isHTML(true);
-        $mail->Subject = 'Service Status Update';
-        $mail->Body    = "
-            <html>
-            <head>
-                <style>
-                    .email-container {
-                        font-family: Arial, sans-serif;
-                        line-height: 1.6;
-                        color: #333;
-                    }
-                    .email-header {
-                        background-color: #007bff;
-                        color: white;
-                        padding: 10px;
-                        text-align: center;
-                    }
-                    .email-body {
-                        padding: 20px;
-                    }
-                    .email-footer {
-                        background-color: #f8f9fa;
-                        padding: 10px;
-                        text-align: center;
-                        font-size: 12px;
-                        color: #666;
-                    }
-                </style>
-            </head>
-            <body>
-                <div class='email-container'>
-                    <div class='email-header'>
-                        <h1>Sikapaiyya Service Update</h1>
-                    </div>
-                    <div class='email-body'>
-                        <p>Dear $name,</p>
-                        <p>Your service status has been updated to: <strong>$status</strong>.</p>
-                        <p>Thank you for choosing Sikapaiyya. If you have any questions, feel free to contact us.</p>
-                    </div>
-                    <div class='email-footer'>
-                        <p>&copy; " . date('Y') . " Sikapaiyya. All rights reserved.</p>
-                    </div>
-                </div>
-            </body>
-            </html>
-        ";
-
-        $mail->send();
-    } catch (Exception $e) {
-        error_log("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
     }
 }
 
