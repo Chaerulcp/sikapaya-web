@@ -104,13 +104,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cancel_id'])) {
             </tbody>
         </table>
         <div class="alert alert-info" role="alert">
-            <p><strong>Catatan:</strong> Pembatalan hanya bisa dilakukan ketika status masih "Menunggu Konfirmasi".</p>
+            <p><strong>Catatan:</strong> Pembatalan hanya bisa dilakukan ketika status masih <span class="badge bg-warning text-dark">Menunggu Konfirmasi</span>.</p>
         </div>
         <div class="alert alert-warning" role="alert">
-            <p><strong>Catatan:</strong> Jika status "Diterima", itu berarti kami sedang mencarikan teknisi untuk memproses permintaan Anda.</p>
+            <p><strong>Catatan:</strong> Jika status <span class="badge bg-success">Diterima</span>, itu berarti kami sedang mencarikan teknisi untuk memproses permintaan Anda.</p>
         </div>
         <div class="alert alert-success" role="alert">
-            <p><strong>Catatan:</strong> Jika status "Dalam Proses", teknisi akan menghubungi Anda untuk mengkonfirmasi kunjungan. Jam kunjungan akan dilakukan pada jam kerja Senin - Jumat antara jam 08.00 - 16.00.</p>
+            <p><strong>Catatan:</strong> Jika status <span class="badge bg-primary">Dalam Proses</span>, teknisi akan menghubungi Anda untuk mengkonfirmasi kunjungan. Jam kunjungan akan dilakukan pada jam kerja Senin - Jumat antara jam 08.00 - 16.00.</p>
         </div>
     </div>
 
