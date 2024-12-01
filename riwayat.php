@@ -11,6 +11,13 @@ $stmt = $db->prepare("SELECT * FROM service WHERE user_id = ?");
 $stmt->execute([$_SESSION['user_id']]);
 $services = $stmt->fetchAll();
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cancel_id'])) {
+    $cancel_id = $_POST['cancel_id'];
+    $update_stmt = $db->prepare("UPDATE service SET status = 'Dibatalkan' WHERE id = ? AND status = 'Menunggu Konfirmasi'");
+    $update_stmt->execute([$cancel_id]);
+    header("Location: riwayat.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -69,6 +76,7 @@ $services = $stmt->fetchAll();
                     <th scope="col">Metode Pembayaran</th>
                     <th scope="col">Catatan</th>
                     <th scope="col">Status</th>
+                    <th scope="col">Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -85,6 +93,12 @@ $services = $stmt->fetchAll();
                     <td><?= $service['metode_pembayaran']; ?></td>
                     <td><?= $service['catatan']; ?></td>
                     <td><?= $service['status']; ?></td>
+                    <td>
+                        <form method="post" style="display:inline;">
+                            <input type="hidden" name="cancel_id" value="<?= $service['id']; ?>">
+                            <button type="submit" class="btn btn-danger" <?= $service['status'] !== 'Menunggu Konfirmasi' ? 'disabled' : ''; ?>>Batalkan</button>
+                        </form>
+                    </td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>

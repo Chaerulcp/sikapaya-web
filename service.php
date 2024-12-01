@@ -15,10 +15,13 @@ $services = $stmt->fetchAll();
 // Pisahkan service berdasarkan status
 $ongoingServices = [];
 $completedServices = [];
+$canceledServices = [];
 
 foreach ($services as $service) {
     if ($service['status'] == 'Selesai') {
         $completedServices[] = $service;
+    } elseif ($service['status'] == 'Dibatalkan') {
+        $canceledServices[] = $service;
     } else {
         $ongoingServices[] = $service;
     }
@@ -144,6 +147,47 @@ foreach ($services as $service) {
                 </thead>
                 <tbody>
                     <?php foreach($completedServices as $service): ?>
+                    <tr>
+                        <th scope="row"><?= $service['id']; ?></th>
+                        <td><?= htmlspecialchars($service['nama']); ?></td>
+                        <td><?= htmlspecialchars($service['alamat']); ?></td>
+                        <td><?= htmlspecialchars($service['tanggal']); ?></td>
+                        <td><?= htmlspecialchars($service['no_hp']); ?></td>
+                        <td><?= htmlspecialchars($service['merk']); ?></td>
+                        <td><?= htmlspecialchars($service['jenis_alat']); ?></td>
+                        <td><?= htmlspecialchars($service['kerusakan']); ?></td>
+                        <td><?= htmlspecialchars($service['metode_pembayaran']); ?></td>
+                        <td><?= htmlspecialchars($service['catatan']); ?></td>
+                        <td><?= htmlspecialchars($service['status']); ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Canceled Services List -->
+    <div class="container" style="margin-top: 50px;">
+        <h2 style="margin-bottom: 20px;">Canceled Services</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">Nama</th>
+                        <th scope="col">Alamat</th>
+                        <th scope="col">Tanggal</th>
+                        <th scope="col">No. HP</th>
+                        <th scope="col">Merk</th>
+                        <th scope="col">Jenis Alat</th>
+                        <th scope="col">Kerusakan</th>
+                        <th scope="col">Metode Pembayaran</th>
+                        <th scope="col">Catatan</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($canceledServices as $service): ?>
                     <tr>
                         <th scope="row"><?= $service['id']; ?></th>
                         <td><?= htmlspecialchars($service['nama']); ?></td>
