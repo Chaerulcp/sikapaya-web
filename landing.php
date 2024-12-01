@@ -6,6 +6,8 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: index.php");
     exit();
 }
+
+$jenisAlat = isset($_GET['jenis']) ? $_GET['jenis'] : '';
 ?>
 
 <!DOCTYPE html>
@@ -85,7 +87,7 @@ if (!isset($_SESSION['user_id'])) {
                     <div class="card-body">
                         <h5 class="card-title">Panasonic</h5>
                         <p class="card-text">Panasonic, yang dulunya dikenal sebagai Matsushita Electric, adalah sebuah perusahaan multinasional asal Jepang yang telah menjadi salah satu pemimpin dalam industri elektronik dunia. Didirikan pada tahun 1918.</p>
-                        <a href="#" class="btn btn-primary">Selengkapnya</a>
+                        <a href="form.php?jenis=Panasonic" class="btn btn-primary">Selengkapnya</a>
                     </div>
                 </div>
             </div>
@@ -96,7 +98,7 @@ if (!isset($_SESSION['user_id'])) {
                     <div class="card-body">
                         <h5 class="card-title">SHARP</h5>
                         <p class="card-text">Sharp Corporation adalah sebuah perusahaan multinasional asal Jepang yang telah lama dikenal sebagai salah satu pemimpin dalam industri elektronik dan salah satu yang terbaik di Jepang. Didirikan pada tahun 1912.</p>
-                        <a href="#" class="btn btn-primary">Selengkapnya</a>
+                        <a href="form.php?jenis=SHARP" class="btn btn-primary">Selengkapnya</a>
                     </div>
                 </div>
             </div>

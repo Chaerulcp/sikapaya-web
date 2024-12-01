@@ -15,6 +15,8 @@ $stmt->execute([$user_id]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 $nama = $user['nama'];
 
+$jenisAlat = isset($_GET['jenis']) ? $_GET['jenis'] : '';
+
 if(isset($_POST['submit'])) {
     $alamat = $_POST['alamat'];
     $tanggal = $_POST['tanggal'];
@@ -94,7 +96,7 @@ if(isset($_POST['submit'])) {
             </div>
             <div class="mb-3">
                 <label for="jenis_alat" class="form-label">Jenis Alat</label>
-                <input type="text" class="form-control" id="jenis_alat" name="jenis_alat" required>
+                <input type="text" class="form-control" id="jenis_alat" name="jenis_alat" value="<?php echo htmlspecialchars($jenisAlat); ?>" readonly>
             </div>
             <div class="mb-3">
                 <label for="kerusakan" class="form-label">Kerusakan</label>
