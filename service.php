@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 require_once 'config.php';
@@ -207,60 +206,7 @@ foreach ($services as $service) {
             </table>
         </div>
     </div>
-<?php
-    require 'vendor/autoload.php'; // Pastikan Anda sudah menginstal PHPMailer via Composer
-    
-    function sendStatusUpdateEmail($service, $newStatus) {
-        $mail = new PHPMailer\PHPMailer\PHPMailer(true);
-    
-        try {
-            // Server settings
-            $mail->isSMTP();
-            $mail->Host = 'smtp.hostinger.com'; // Ganti dengan host SMTP Anda
-            $mail->SMTPAuth = true;
-            $mail->Username = 'no-reply@sikapayya.com'; // Ganti dengan email SMTP Anda
-            $mail->Password = '@Sikapayya123'; // Ganti dengan password SMTP Anda
-            $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port = 587;
-    
-            // Recipients
-            $mail->setFrom('no-reply@sikapaiyya.com', 'Sikapaiyya Team');
-            $mail->addAddress($service['email'], $service['nama']);
-    
-            // Content
-            $mail->isHTML(true);
-            $mail->Subject = 'Service Status Update';
-            $mail->Body    = "
-            <html>
-            <head>
-                <title>Service Status Update</title>
-            </head>
-            <body>
-                <p>Dear " . htmlspecialchars($service['nama']) . ",</p>
-                <p>Your service request with the following details has been updated:</p>
-                <table>
-                    <tr>
-                        <th>Service ID</th><td>" . htmlspecialchars($service['id']) . "</td>
-                    </tr>
-                    <tr>
-                        <th>Service Name</th><td>" . htmlspecialchars($service['nama']) . "</td>
-                    </tr>
-                    <tr>
-                        <th>New Status</th><td>" . htmlspecialchars($newStatus) . "</td>
-                    </tr>
-                </table>
-                <p>Thank you for using our service.</p>
-                <p>Best regards,<br>Sikapaiyya Team</p>
-            </body>
-            </html>
-            ";
-    
-            $mail->send();
-        } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-        }
-    }
-    ?>
+
     <script src="js/bootstrap.js"></script>
     <script src="js/popper.min.js"></script>
 </body>
