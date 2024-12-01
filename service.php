@@ -11,6 +11,18 @@ if(!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
 $stmt = $db->prepare("SELECT * FROM service");
 $stmt->execute();
 $services = $stmt->fetchAll();
+
+// Pisahkan service berdasarkan status
+$ongoingServices = [];
+$completedServices = [];
+
+foreach ($services as $service) {
+    if ($service['status'] == 'Selesai') {
+        $completedServices[] = $service;
+    } else {
+        $ongoingServices[] = $service;
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -68,7 +80,7 @@ $services = $stmt->fetchAll();
     <!-- Service List -->
     <div class="container" style="margin-top: 100px;">
         <h2 style="margin-bottom: 20px;">Service List</h2>
-        <div class="table-responsive">
+        <div class="table-responsive"></div>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -87,7 +99,7 @@ $services = $stmt->fetchAll();
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($services as $service): ?>
+                    <?php foreach($ongoingServices as $service): ?>
                     <tr>
                         <th scope="row"><?= $service['id']; ?></th>
                         <td><?= htmlspecialchars($service['nama']); ?></td>
@@ -103,6 +115,47 @@ $services = $stmt->fetchAll();
                         <td>
                             <a href="update_status.php?id=<?= $service['id']; ?>" class="btn btn-primary btn-sm">Update Status</a>
                         </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Completed Services List -->
+    <div class="container" style="margin-top: 50px;">
+        <h2 style="margin-bottom: 20px;">Completed Services</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">Nama</th>
+                        <th scope="col">Alamat</th>
+                        <th scope="col">Tanggal</th>
+                        <th scope="col">No. HP</th>
+                        <th scope="col">Merk</th>
+                        <th scope="col">Jenis Alat</th>
+                        <th scope="col">Kerusakan</th>
+                        <th scope="col">Metode Pembayaran</th>
+                        <th scope="col">Catatan</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($completedServices as $service): ?>
+                    <tr>
+                        <th scope="row"><?= $service['id']; ?></th>
+                        <td><?= htmlspecialchars($service['nama']); ?></td>
+                        <td><?= htmlspecialchars($service['alamat']); ?></td>
+                        <td><?= htmlspecialchars($service['tanggal']); ?></td>
+                        <td><?= htmlspecialchars($service['no_hp']); ?></td>
+                        <td><?= htmlspecialchars($service['merk']); ?></td>
+                        <td><?= htmlspecialchars($service['jenis_alat']); ?></td>
+                        <td><?= htmlspecialchars($service['kerusakan']); ?></td>
+                        <td><?= htmlspecialchars($service['metode_pembayaran']); ?></td>
+                        <td><?= htmlspecialchars($service['catatan']); ?></td>
+                        <td><?= htmlspecialchars($service['status']); ?></td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
