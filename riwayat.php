@@ -103,6 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cancel_id'])) {
                 <?php endforeach; ?>
             </tbody>
         </table>
+        <p>Catatan: Pembatalan hanya bisa dilakukan ketika status masih "Menunggu Konfirmasi".</p>
     </div>
 
     <script src="js/bootstrap.js"></script>
