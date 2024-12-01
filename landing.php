@@ -6,8 +6,6 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: index.php");
     exit();
 }
-
-$jenisAlat = isset($_GET['jenis']) ? $_GET['jenis'] : '';
 ?>
 
 <!DOCTYPE html>
