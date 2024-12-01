@@ -102,7 +102,7 @@ if (isset($_POST['login'])) {
             <div class="col-md-6">
                 <div class="card">   
                     <div class="card-body">
-                        <h4 class="card-title text-center">Selamat datang di Portal Layanan sikapayya</h4>
+                        <h4 class="card-title text-center">Selamat datang di Portal Layanan sikapaiya</h4>
                         <p class="text-center text-muted">Silakan login untuk melanjutkan</p>
                         <?php if(isset($error)): ?>
                             <div class="alert alert-danger"><?php echo $error; ?></div>

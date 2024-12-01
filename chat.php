@@ -257,7 +257,7 @@ if (isset($_POST['start_new_chat'])) {
     <!-- Navbar-->
     <nav class="navbar navbar-expand-lg navbar-light bg-primary fixed-top">
         <div class="container">
-            <a class="navbar-brand fw-bold text-white" href="landing.php">Sikapaiyya</a>
+            <a class="navbar-brand fw-bold text-white" href="landing.php">Sikapaiya</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
