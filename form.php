@@ -2,7 +2,7 @@
 session_start();
 require_once 'config.php';
 
-if(!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id'])) {
     header("Location: index.php");
     exit();
 }
@@ -15,7 +15,10 @@ $stmt->execute([$user_id]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 $nama = $user['nama'];
 
-if(isset($_POST['submit'])) {
+// Check if 'jenis' parameter is set in the URL
+$jenis_alat = isset($_GET['jenis']) ? $_GET['jenis'] : '';
+
+if (isset($_POST['submit'])) {
     $alamat = $_POST['alamat'];
     $tanggal = $_POST['tanggal'];
     $nohp = $_POST['nohp'];
@@ -94,7 +97,7 @@ if(isset($_POST['submit'])) {
             </div>
             <div class="mb-3">
                 <label for="jenis_alat" class="form-label">Jenis Alat</label>
-                <input type="text" class="form-control" id="jenis_alat" name="jenis_alat" required>
+                <input type="text" class="form-control" id="jenis_alat" name="jenis_alat" value="<?php echo htmlspecialchars($jenis_alat); ?>" required>
             </div>
             <div class="mb-3">
                 <label for="kerusakan" class="form-label">Kerusakan</label>
