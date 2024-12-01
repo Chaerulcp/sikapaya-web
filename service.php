@@ -216,10 +216,10 @@ foreach ($services as $service) {
         try {
             // Server settings
             $mail->isSMTP();
-            $mail->Host = 'smtp.example.com'; // Ganti dengan host SMTP Anda
+            $mail->Host = 'smtp.hostinger.com'; // Ganti dengan host SMTP Anda
             $mail->SMTPAuth = true;
-            $mail->Username = 'your_email@example.com'; // Ganti dengan email SMTP Anda
-            $mail->Password = 'your_password'; // Ganti dengan password SMTP Anda
+            $mail->Username = 'no-reply@sikapayya.com'; // Ganti dengan email SMTP Anda
+            $mail->Password = '@Sikapayya123'; // Ganti dengan password SMTP Anda
             $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
     
