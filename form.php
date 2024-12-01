@@ -85,7 +85,12 @@ if(isset($_POST['submit'])) {
             </div>
             <div class="mb-3">
                 <label for="merk" class="form-label">Merk</label>
-                <input type="text" class="form-control" id="merk" name="merk" required>
+                 <select class="form-select" id="merk" name="merk" required>
+                    <option value="LG">LG</option>
+                    <option value="Denpoo">Denpoo</option>
+                    <option value="Panasonic">Panasonic</option>
+                    <option value="SHARP">SHARP</option>
+                </select>
             </div>
             <div class="mb-3">
                 <label for="jenis_alat" class="form-label">Jenis Alat</label>
