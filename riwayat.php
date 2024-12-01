@@ -18,6 +18,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cancel_id'])) {
     header("Location: riwayat.php");
     exit();
 }
+
+function getStatusClass($status) {
+    switch ($status) {
+        case 'Menunggu Konfirmasi':
+            return 'badge bg-warning text-dark';
+        case 'Dibatalkan':
+            return 'badge bg-danger';
+        case 'Diterima':
+            return 'badge bg-success';
+        case 'Dalam Proses':
+            return 'badge bg-primary';
+        default:
+            return 'badge bg-secondary';
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -92,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cancel_id'])) {
                     <td><?= $service['kerusakan']; ?></td>
                     <td><?= $service['metode_pembayaran']; ?></td>
                     <td><?= $service['catatan']; ?></td>
-                    <td><?= $service['status']; ?></td>
+                    <td><span class="<?= getStatusClass($service['status']); ?>"><?= $service['status']; ?></span></td>
                     <td>
                         <form method="post" style="display:inline;">
                             <input type="hidden" name="cancel_id" value="<?= $service['id']; ?>">
