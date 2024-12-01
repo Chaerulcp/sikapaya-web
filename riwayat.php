@@ -103,7 +103,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cancel_id'])) {
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <p>Catatan: Pembatalan hanya bisa dilakukan ketika status masih "Menunggu Konfirmasi".</p>
+        <div class="alert alert-info" role="alert">
+            <p><strong>Catatan:</strong> Pembatalan hanya bisa dilakukan ketika status masih "Menunggu Konfirmasi".</p>
+        </div>
+        <div class="alert alert-warning" role="alert">
+            <p><strong>Catatan:</strong> Jika status "Diterima", itu berarti kami sedang mencarikan teknisi untuk memproses permintaan Anda.</p>
+        </div>
+        <div class="alert alert-success" role="alert">
+            <p><strong>Catatan:</strong> Jika status "Dalam Proses", teknisi akan menghubungi Anda untuk mengkonfirmasi kunjungan. Jam kunjungan akan dilakukan pada jam kerja Senin - Jumat antara jam 08.00 - 16.00.</p>
+        </div>
     </div>
 
     <script src="js/bootstrap.js"></script>
