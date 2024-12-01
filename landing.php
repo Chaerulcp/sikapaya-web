@@ -55,7 +55,7 @@ if (!isset($_SESSION['user_id'])) {
     <!-- Brand Cards -->
     <div class="container" style="margin-top: 100px;">
         <h2 style="margin-bottom: 20px;" id="brand">Brand</h2>
-        <div class="row"></div>
+        <div class="row">
             <!-- Brand cards from original design -->
             <div class="col-md-6 col-lg-3 mb-4">
                 <div class="card">

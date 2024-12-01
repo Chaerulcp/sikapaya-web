@@ -190,10 +190,10 @@ ob_end_flush(); // End output buffering and flush output
                                 <input class="form-check-input" type="radio" name="role" value="user" checked>
                                 <label class="form-check-label">User</label>
                             </div>
-                            <div class="form-check">
+                            <!-- <div class="form-check">
                                 <input class="form-check-input" type="radio" name="role" value="admin">
                                 <label class="form-check-label">Admin</label>
-                            </div>
+                            </div> -->
                             <button type="submit" name="daftar" class="btn btn-primary btn-block mt-4">Daftar</button>
                             <a href="index.php" class="btn btn-danger btn-block mt-2">Kembali</a>
                         </form>
