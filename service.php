@@ -26,6 +26,21 @@ foreach ($services as $service) {
         $ongoingServices[] = $service;
     }
 }
+
+function getStatusClass($status) {
+    switch ($status) {
+        case 'Menunggu Konfirmasi':
+            return 'badge bg-warning text-dark';
+        case 'Dibatalkan':
+            return 'badge bg-danger';
+        case 'Diterima':
+            return 'badge bg-success';
+        case 'Dalam Proses':
+            return 'badge bg-primary';
+        default:
+            return 'badge bg-secondary';
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -114,7 +129,7 @@ foreach ($services as $service) {
                         <td><?= htmlspecialchars($service['kerusakan']); ?></td>
                         <td><?= htmlspecialchars($service['metode_pembayaran']); ?></td>
                         <td><?= htmlspecialchars($service['catatan']); ?></td>
-                        <td><?= htmlspecialchars($service['status']); ?></td>
+                        <td><span class="<?= getStatusClass($service['status']); ?>"><?= htmlspecialchars($service['status']); ?></span></td>
                         <td>
                             <a href="update_status.php?id=<?= $service['id']; ?>" class="btn btn-primary btn-sm">Update Status</a>
                         </td>
@@ -158,7 +173,7 @@ foreach ($services as $service) {
                         <td><?= htmlspecialchars($service['kerusakan']); ?></td>
                         <td><?= htmlspecialchars($service['metode_pembayaran']); ?></td>
                         <td><?= htmlspecialchars($service['catatan']); ?></td>
-                        <td><?= htmlspecialchars($service['status']); ?></td>
+                        <td><span class="<?= getStatusClass($service['status']); ?>"><?= htmlspecialchars($service['status']); ?></span></td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -199,7 +214,7 @@ foreach ($services as $service) {
                         <td><?= htmlspecialchars($service['kerusakan']); ?></td>
                         <td><?= htmlspecialchars($service['metode_pembayaran']); ?></td>
                         <td><?= htmlspecialchars($service['catatan']); ?></td>
-                        <td><?= htmlspecialchars($service['status']); ?></td>
+                        <td><span class="<?= getStatusClass($service['status']); ?>"><?= htmlspecialchars($service['status']); ?></span></td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
